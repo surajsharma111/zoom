@@ -3,7 +3,7 @@ import Logo from "../components/Logo"
 import CheckCircle from "../components/CheckCircle"
 function SignUp(){
     return(
-        <div className="flex justify-center max-w-full w-full">
+        <div className="flex justify-center max-w-full w-full h-screen ">
            <div className="container max-w-full w-full bg-gray-50">
            <div className=" box-border items-center w-full topbar flex flex-row h-16 justify-between bg-white flex-grow border w-">
                     <div className="p-8">
@@ -17,13 +17,14 @@ function SignUp(){
 
                 </div>
 
-                <div className="body bg-white flex flex-row w-full items-center ">
-                    <div className="left-container border w-2/5 flex flex-col gap-5 bg-gray-50">
-                        <div className=" w-4/5 m-0 m-auto">
+                <div className="body h-full bg-white flex flex-row w-full items-center ">
+                    <div className=" h-full left-container border w-2/5 h-full flex flex-col  bg-gray-50">
+
+                        <div className=" w-4/5 m-0 m-auto mb-0">
                              <Banner/>
                         </div>
                         
-                        <div className="  flex gap-3 flex-col border rounded-2xl p-6 w-4/5 m-0 m-auto bg-white ">
+                        <div className=" flex gap-3 flex-col  rounded-2xl p-6 mt-0 w-4/5 m-0 m-auto  bg-white shadow-gray-300 ">
                             <h2 className=" font-bold text-2xl flex justify-center">Create your free Basic account</h2>
                             <ul className="flex flex-col gap-3 font-Almaden font-sans">
                                 <li className="flex flex-row gap-5  flex-nowrap">
