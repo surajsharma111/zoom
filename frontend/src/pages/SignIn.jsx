@@ -43,7 +43,7 @@ function SignIn() {
                                 <div className="w-2/6 border-t-2 ml-0"></div>
                             </div>
                             <div>
-                                
+                                <img src={<svg aria-hidden="true" viewBox="0 0 16 16" className="zm-icons zm-icons--mini"><use href="#key" xlinkHref="#key"></use></svg>} alt="" />
                             </div>
 
                         </div>
