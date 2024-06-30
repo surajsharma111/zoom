@@ -25,7 +25,6 @@ function SignUp(){
     }
     const handleVerifyAge =  (event)=>{
         event.preventDefault();
-        console.log(birthyear);
         const today = new Date();
         const currentYear  = today.getFullYear();
         const age = currentYear - parseInt(birthyear);
@@ -90,7 +89,8 @@ function SignUp(){
                             <IoWarning size={120} className=" text-red-700" />
                             </div>
                            <p className=" text-2xl font-bold text-center"> Sorry You cannot sign up for Zoom at this time.</p> 
-                            </div>):
+                            </div>)
+                            :
                         (
                             <div className=" w-3/5   h-full flex justify-center items-center"> 
                             <form onSubmit={handleVerifyAge} className=" flex flex-col gap-8 items-center ">

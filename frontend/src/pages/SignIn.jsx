@@ -34,7 +34,7 @@ function SignIn() {
                         
                     </div>
                     <div className=" w-3/5   h-full flex justify-center items-center border "> 
-                        <div className=" flex flex-col gap-8 items-center border w-1/2 ">
+                        <div className=" flex flex-col gap-8 items-center  w-1/2 ">
                             <h1 className=" text-3xl font-semibold">Sign In</h1>
                             <input className=" p-3 border border-black rounded-lg w-4/5" type="email" name="email" id="email" placeholder="Email Address" />
                             <input className=" p-3 border border-black rounded-lg w-4/5" type="password" name="password" id="password" placeholder="password" />
@@ -53,17 +53,26 @@ function SignIn() {
                                 <p className="w-2/6 mt-0 mr-0">or sign in with</p>
                                 <div className="w-2/6 border-t-2 ml-0"></div>
                             </div>
-                            <div className=" flex flex-row gap-4">
-                                <div>
-                                        
+                            <div className=" flex flex-row w-4/5 justify-around">
+                                <div className=" border p-3 flex justify-center items-center rounded-xl">
+                                    < FaKey className=" w-6 h-6" />
                                 </div>
-                                <FcGoogle />
-                                <FaApple />
-                               < FaFacebook className=" text-blue" />
-
+                                    <div className=" border p-3 flex justify-center items-center rounded-xl">
+                                    < FcGoogle className=" w-6 h-6" />
+                                </div>
+                                    <div className=" border p-3 flex justify-center items-center rounded-xl">
+                                    < FaApple className=" w-6 h-6" />
+                                </div>
                                 
+                                    
+                                <div className=" border p-3 flex justify-center items-center rounded-xl">
+                                    < FaFacebook className=" text-blue w-6 h-6" />
+                                </div>
 
                             </div>
+                            <p className=" w-4/5">
+                                 Zoom is protected by reCAPTCHA and the <a className=" text-blue" href="#">Privacy Policy</a> and <a className=" text-blue" href="#">Terms of Service</a> apply.
+                            </p>
 
                         </div>
                     </div>
