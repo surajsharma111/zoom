@@ -93,7 +93,9 @@ function SignUp() {
                         <form onSubmit={handleSubmit} className=" flex flex-col gap-8 items-center  ">
                             <h1 className=" text-3xl font-semibold">Let's Get Started</h1>
                             <input value={emailaddress} onChange={handleEmailChange} className=" p-3 border border-black rounded-lg w-3/5" type="email" name="email" id="email" placeholder="Email Address" />
-                            
+                            {
+                                
+                            }
                             <input disabled ={!emailaddress}  className="  bg-blue text-white p-2  w-3/5 rounded-xl border disabled:bg-slate-100 disabled:text-slate-500" type="submit" name="submit" value={"continue"} id="" />
                             <p className=" w-3/5">By signing in, I agree to the <a href="#" className=" text-blue">zoom privacy</a> <a className=" text-blue" href="">Statement</a> and <a className=" text-blue" href="">Terms of Service.</a></p>
                             <div className=" w-3/5 flex flex-row gap-3">
