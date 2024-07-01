@@ -4,6 +4,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Chat from "./pages/Chat";
 import GetStarted from "./pages/GetStarted";
+import Otp from "./pages/Otp";
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
     {
       path: "/getstarted",
       element: <GetStarted />
+    },
+    {
+      path: "/otp",
+      element: <Otp />
     },
 
   ]);

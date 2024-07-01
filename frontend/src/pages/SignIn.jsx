@@ -33,27 +33,27 @@ function SignIn() {
                         </div>
                         
                     </div>
-                    <div className=" w-3/5   h-full flex justify-center items-center border "> 
-                        <div className=" flex flex-col gap-8 items-center  w-1/2 ">
+                    <div className=" w-3/5   h-full flex justify-center items-center  "> 
+                        <form className=" flex flex-col gap-8 items-center  ">
                             <h1 className=" text-3xl font-semibold">Sign In</h1>
-                            <input className=" p-3 border border-black rounded-lg w-4/5" type="email" name="email" id="email" placeholder="Email Address" />
-                            <input className=" p-3 border border-black rounded-lg w-4/5" type="password" name="password" id="password" placeholder="password" />
-                            <div className=" flex justify-between text-blue w-4/5">
+                            <input className=" p-3 border border-black rounded-lg w-3/5" type="email" name="email" id="email" placeholder="Email Address" />
+                            <input className=" p-3 border border-black rounded-lg w-3/5" type="password" name="password" id="password" placeholder="password" />
+                            <div className=" flex justify-between text-blue w-3/5">
                                 <a href="#">forgot password</a>
                                 <a href="#">Help?</a>
                             </div>
-                            <input className="  text-white bg-blue p-2  w-4/5 rounded-xl border " type="submit" name="submit" value={"Sign In"} id="" />
-                            <p className=" w-4/5">By signing in, I agree to the <a href="#" className=" text-blue">zoom privacy</a> <a className=" text-blue" href="">Statement</a> and <a className=" text-blue" href="">Terms of Service.</a></p>
-                            <div className=" w-4/5 flex flex-row gap-3">
+                            <input className="  text-white bg-blue p-2  w-3/5 rounded-xl border " type="submit" name="submit" value={"Sign In"} id="" />
+                            <p className=" w-3/5">By signing in, I agree to the <a href="#" className=" text-blue">zoom privacy</a> <a className=" text-blue" href="">Statement</a> and <a className=" text-blue" href="">Terms of Service.</a></p>
+                            <div className=" w-3/5 flex flex-row gap-3">
                                 <input type="checkbox" />
                                 <p> Stay signed in</p>
                             </div>
-                            <div className=" w-4/5 justify-center items-center gap-2  flex flex-row">
+                            <div className=" w-3/5 justify-center items-center gap-2  flex flex-row">
                                 <div className="w-2/6 border-t-2"></div>
                                 <p className="w-2/6 mt-0 mr-0">or sign in with</p>
                                 <div className="w-2/6 border-t-2 ml-0"></div>
                             </div>
-                            <div className=" flex flex-row w-4/5 justify-around">
+                            <div className=" flex flex-row w-3/5 justify-around">
                                 <div className=" border p-3 flex justify-center items-center rounded-xl">
                                     < FaKey className=" w-6 h-6" />
                                 </div>
@@ -70,11 +70,11 @@ function SignIn() {
                                 </div>
 
                             </div>
-                            <p className=" w-4/5">
+                            <p className=" w-3/5">
                                  Zoom is protected by reCAPTCHA and the <a className=" text-blue" href="#">Privacy Policy</a> and <a className=" text-blue" href="#">Terms of Service</a> apply.
                             </p>
 
-                        </div>
+                        </form>
                     </div>
                 </div>
 

@@ -5,6 +5,7 @@ import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { IoWarning } from "react-icons/io5";
 import { useCookies } from "react-cookie"
+import { useNavigate } from "react-router-dom"
 
 function SignUp(){
     const features = [
@@ -12,11 +13,15 @@ function SignUp(){
         'Keep everyone engage with screen sharing and caption',
         'Be meeting ready with HD-quality video and virtual background',
         'Collaborate using Team chat messages, whtieboards, and video clips',
-        'Boost productivity with built-in Calendar, Mail, and Notes'
+        'Boost productivity with built-in Calendar, Mail, and Notes',
+        'Screen sharing, virtual backgrounds, breakout rooms, and local recording',
+        
+
     ];
     const [cookies, setCookie] = useCookies(['underAge'])
     const [underAge, setUnderAge] = useState(false)
     const [birthyear, setBirthYear] = useState('');
+    const navigate = useNavigate();
     
 
     const handelBirthYear = function (event){
@@ -32,8 +37,12 @@ function SignUp(){
             setUnderAge(true);
             setCookie('underAge', true)
         }
+        if(age>16){
+            navigate('/getstarted')
+        }
 
     }
+   
     useEffect(() =>{
         if(cookies.underAge){
             setUnderAge(true)
@@ -42,7 +51,7 @@ function SignUp(){
     return(
         <div className="flex justify-center max-w-full w-full h-screen ">
            <div className="container max-w-full w-full bg-gray-50">
-           <div className=" box-border items-center w-full topbar flex flex-row h-16 justify-between bg-white flex-grow  w-">
+           <div className=" box-border items-center w-full topbar flex flex-row h-16 justify-between bg-white flex-grow  ">
                     <div className="p-8">
                         <Logo />
                     </div>
