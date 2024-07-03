@@ -14,10 +14,17 @@ datasource db {
 }
 
 
-model User{
-  id Int @id @default(autoincrement())
-  email String @unique
-  name String?
-  otp Int?
-  otpExpiry DateTime?
+model User {
+  id    Int     @id @default(autoincrement())
+  email String  @unique
+  name  String?
+}
+
+model SignUpVerification {
+  id         String @id @default(uuid())
+  email      String @unique
+  code       String
+  expiryAt   DateTime
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
 }

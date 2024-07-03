@@ -38,7 +38,7 @@ function SignUp(){
             setCookie('underAge', true)
         }
         if(age>16){
-            navigate('/getstarted')
+            navigate(`/getstarted?birthyear=${birthyear}`)
         }
 
     }

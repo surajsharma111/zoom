@@ -2,15 +2,17 @@ import Banner2 from "../components/Banner2"
 import Logo from "../components/Logo"
 import CheckCircle from "../components/CheckCircle"
 import { Link } from "react-router-dom"
-import { useEffect, useState } from "react"
-import { IoWarning } from "react-icons/io5";
-import { useCookies } from "react-cookie"
 import { FaKey } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"
-import axios from "axios"
+import {useForm} from 'react-hook-form'
+import {yupResolver} from '@hookform/resolvers/yup'
+import { validationSchema } from "../validationSchema/getStarted";
+import signUpCheckEmail from "../action/signUp";
+import { useNavigate } from "react-router-dom";
+
+
 
 function SignUp() {
     const features = [
@@ -23,33 +25,29 @@ function SignUp() {
         'Notes for creating and sharing editable documents'
 
     ];
-    const [emailaddress, setEmail] = useState('')
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
-    const handleEmailChange = function (event) {
-        const value = event.target.value
-        setEmail(value)
-    };
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        if (emailaddress) {
-            navigate('/otp')
-
-        }
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors},
+      } = useForm({
+        resolver: yupResolver(validationSchema)
+      });
+    
+    
+      async function handelEmail(data){
+        console.log(data)
+        await signUpCheckEmail(data)
+        navigate('/otp')
         
-        console.log(emailaddress)
+        
+        
 
-        try{
-            await axios.post("http://localhost:5173/getstarted", {
-                emailaddress
-            })
-            
-        } catch(e){
-            console.log(e);
-        }
-
-
-    }
+      }
+   
+  
 
 
 
@@ -100,11 +98,12 @@ function SignUp() {
 
 
                     <div className=" w-3/5   h-full flex justify-center items-center  ">
-                        <form onSubmit={handleSubmit} className=" flex flex-col gap-8 items-center  ">
+                        <form onSubmit={handleSubmit(handelEmail)} className=" flex flex-col gap-8 items-center  ">
                             <h1 className=" text-3xl font-semibold">Let's Get Started</h1>
-                            <input value={emailaddress} onChange={handleEmailChange} className=" p-3 border border-black rounded-lg w-3/5" type="email" name="email" id="email" placeholder="Email Address" />
+                            <input {...register('email')}  className=" p-3 border border-black rounded-lg w-3/5" type="email" name="email" id="email" placeholder="Email Address" />
+                            {errors.email?.meaasge && <span className=" text-sm text-red-600">{errors.email.message}</span>}
                             
-                            <input disabled={!emailaddress} className="  bg-blue text-white p-2  w-3/5 rounded-xl border disabled:bg-slate-100 disabled:text-slate-500" type="submit" name="submit" value={"continue"} id="" />
+                            <input disabled={!watch('email')} className="  bg-blue text-white p-2  w-3/5 rounded-xl border disabled:bg-slate-100 disabled:text-slate-500" type="submit" name="submit" value={"continue"} id="" />
                             <p className=" w-3/5">By signing in, I agree to the <a href="#" className=" text-blue">zoom privacy</a> <a className=" text-blue" href="">Statement</a> and <a className=" text-blue" href="">Terms of Service.</a></p>
                             <div className=" w-3/5 flex flex-row gap-3">
                                 <input type="checkbox" />
