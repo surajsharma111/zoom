@@ -27,22 +27,23 @@ function SignUp() {
     const [emailaddress, setEmail] = useState('')
     const navigate = useNavigate();
 
-    const handleEmailChange = function(event) {
+    const handleEmailChange = function (event) {
         const value = event.target.value
         setEmail(value)
     };
-    const handleSubmit = async(e)=>{
+    const handleSubmit = async (e) => {
         e.preventDefault()
-        if(emailaddress){
+        if (emailaddress) {
             navigate('/otp')
 
         }
+        console.log(emailaddress)
 
 
     }
-    
 
-    
+
+
 
     return (
         <div className="flex justify-center max-w-full w-full h-screen ">
@@ -94,9 +95,9 @@ function SignUp() {
                             <h1 className=" text-3xl font-semibold">Let's Get Started</h1>
                             <input value={emailaddress} onChange={handleEmailChange} className=" p-3 border border-black rounded-lg w-3/5" type="email" name="email" id="email" placeholder="Email Address" />
                             {
-                                
+
                             }
-                            <input disabled ={!emailaddress}  className="  bg-blue text-white p-2  w-3/5 rounded-xl border disabled:bg-slate-100 disabled:text-slate-500" type="submit" name="submit" value={"continue"} id="" />
+                            <input disabled={!emailaddress} className="  bg-blue text-white p-2  w-3/5 rounded-xl border disabled:bg-slate-100 disabled:text-slate-500" type="submit" name="submit" value={"continue"} id="" />
                             <p className=" w-3/5">By signing in, I agree to the <a href="#" className=" text-blue">zoom privacy</a> <a className=" text-blue" href="">Statement</a> and <a className=" text-blue" href="">Terms of Service.</a></p>
                             <div className=" w-3/5 flex flex-row gap-3">
                                 <input type="checkbox" />
@@ -130,7 +131,7 @@ function SignUp() {
 
                         </form>
                     </div>
-                    
+
 
                 </div>
             </div>
