@@ -9,7 +9,7 @@ import random from "random";
     const code = String(random.int(1000000, 999999))
     const now = new Date();
     const expiryAt = date.addMinutes(now, 10);
-    await prisma.signUpVerification.create({
+   return await prisma.signUpVerification.create({
         data:{
             email,
             code,

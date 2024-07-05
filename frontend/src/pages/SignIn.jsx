@@ -5,11 +5,35 @@ import { FaKey } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
+import { useForm } from "react-hook-form";
+import {yupResolver} from '@hookform/resolvers/yup'
+import { signinValidationSchema } from "../validationSchema/signIn";
+import checkSigninEmail from "../action/siginAction";
+
+
+
+
 
 
 
 
 function SignIn() {
+    const { 
+            register,
+            handleSubmit,
+            watch,
+            formState: { errors } } = useForm({
+                resolver: yupResolver(signinValidationSchema)
+            });
+
+            async function handelSignIn(data){
+                await checkSigninEmail(data)
+                
+           
+
+                
+            }
+           
     return (
         <div className=" container w-screen h-screen max-w-full">
             <div className=" box-border items-center w-full topbar flex flex-row h-16 justify-between bg-white flex-grow border w-">
@@ -34,15 +58,17 @@ function SignIn() {
                         
                     </div>
                     <div className=" w-3/5   h-full flex justify-center items-center  "> 
-                        <form className=" flex flex-col gap-8 items-center  ">
+                        <form onSubmit={handleSubmit(handelSignIn)} className=" flex flex-col gap-8 items-center  ">
                             <h1 className=" text-3xl font-semibold">Sign In</h1>
-                            <input className=" p-3 border border-black rounded-lg w-3/5" type="email" name="email" id="email" placeholder="Email Address" />
-                            <input className=" p-3 border border-black rounded-lg w-3/5" type="password" name="password" id="password" placeholder="password" />
+                            <input {...register('email')} className=" p-3 border border-black rounded-lg w-3/5" type="email"  id="email" placeholder="Email Address" />
+                            {errors.email?.message && <span className=" text-sm text-red-600">{errors.email.message}</span>}
+                            <input {...register('password')} className=" p-3 border border-black rounded-lg w-3/5" type="password"  id="password" placeholder="password" />
+                            {errors.password?.message && <span className=" text-sm text-red-600">{errors.password.message}</span>}
                             <div className=" flex justify-between text-blue w-3/5">
                                 <a href="#">forgot password</a>
                                 <a href="#">Help?</a>
                             </div>
-                            <input className="  text-white bg-blue p-2  w-3/5 rounded-xl border " type="submit" name="submit" value={"Sign In"} id="" />
+                            <input disabled={!watch('email', 'password')}  className="  text-white bg-blue p-2  w-3/5 rounded-xl border " type="submit" name="submit" value={"Sign In"} id="" />
                             <p className=" w-3/5">By signing in, I agree to the <a href="#" className=" text-blue">zoom privacy</a> <a className=" text-blue" href="">Statement</a> and <a className=" text-blue" href="">Terms of Service.</a></p>
                             <div className=" w-3/5 flex flex-row gap-3">
                                 <input type="checkbox" />

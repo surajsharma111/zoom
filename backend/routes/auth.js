@@ -2,17 +2,32 @@
 import express from 'express';
 import createSignUpVerification from '../services/authServices.js'
 var router = express.Router();
+import sendVerification from '../services/emailService.js'
 
 
 
 router.post('/sign-up/check-email', async function(req, res, next){
   const data = req.body;
-  await createSignUpVerification(data.email)
+  const response = await createSignUpVerification(data.email)
+  await sendVerification({
+    code: response.code,
+  })
   res.send('Sign up user')
+  
 
 })
+
+
+ router.post('/sign-in/check-emailandpassword', async function(req, res, next){
+   const data = req.body;
+   await createSignUpVerification(data.email)
+   res.send('Sign in user')
+
+ })
 export default router
   
+
+
 
 
 

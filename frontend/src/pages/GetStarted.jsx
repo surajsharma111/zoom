@@ -38,7 +38,6 @@ function SignUp() {
     
     
       async function handelEmail(data){
-        console.log(data)
         await signUpCheckEmail(data)
         navigate('/otp')
         
