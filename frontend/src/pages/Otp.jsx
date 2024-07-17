@@ -3,10 +3,33 @@ import Logo from "../components/Logo"
 import { Link } from "react-router-dom"
 import { SiGmail } from "react-icons/si";
 import { PiMicrosoftOutlookLogo } from "react-icons/pi";
+import OtpInput from 'react-otp-input';
+import { useState, useEffect } from "react";
+import checkOtp from '../action/verifyOtp'
+
 
 
 
 function Otp() {
+    const [otp, setOtp] = useState('');
+    const [email, setEmail] = useState('')
+ 
+ 
+    let emailParams;
+   useEffect(()=>{
+    const searchParams = new URLSearchParams(window.location.search)
+     emailParams = searchParams.get('email')
+    if(emailParams){
+        setEmail(emailParams)
+    }
+    console.log(emailParams)
+   })
+   const handleEmail =  async function(event){
+    event.preventDefault();
+    
+    await checkOtp(emailParams)
+   }
+    
     return (
         <div className="flex justify-center max-w-full w-full h-screen ">
             <div className="container max-w-full w-full bg-gray-50">
@@ -31,19 +54,27 @@ function Otp() {
                         </div>
                     </div>
                     <div className=" w-3/5   h-full flex justify-center items-center  ">
-                        <form  className=" flex flex-col gap-8 items-center  ">
+                        <form onSubmit={handleEmail}
+                          className=" flex flex-col gap-8 items-center  ">
                             <h1 className=" text-3xl font-semibold">Check Your Email For A Code</h1>
-                            <p>Please enter the verification code sent to your email address srjsharma987@gmail.com</p>
-                            <div className=" p-3 rounded-lg w-3/5 pt-0 pb-0   flex justify-evenly">
-                                <input type="text" maxLength={1} className=" border w-10 h-14 border-black rounded-lg shadow-lg text-center" />
-                                <input type="text" maxLength={1} className=" border w-10 h-14 border-black rounded-lg shadow-lg text-center" />
-                                <input type="text" maxLength={1} className=" border w-10 h-14 border-black rounded-lg shadow-lg text-center" />
-                                <input type="text" maxLength={1} className=" border w-10 h-14 border-black rounded-lg shadow-lg text-center" />
-                                <input type="text" maxLength={1} className=" border w-10 h-14 border-black rounded-lg shadow-lg text-center" />
-                                <input type="text" maxLength={1} className=" border w-10 h-14 border-black rounded-lg shadow-lg text-center" />
-                              
+                            <p>{
+                                `Please enter the verification code sent to your email address ${email}`
+                                }</p>
+                            
                                 
-                            </div>
+                                <OtpInput
+                                
+                                    className=" border border-black"
+                                    value={otp}
+                                    onChange={setOtp}
+                                    numInputs={6}
+                                    renderSeparator={<span>-</span>}
+                                    renderInput={(props) => <input {...props} />}
+                                
+                                />
+
+                       
+                            
                             <p className=" flex justify-end w-3/5 gap-2">
                                 code expired <a className=" text-blue" href="#">Resend</a>
                             </p>

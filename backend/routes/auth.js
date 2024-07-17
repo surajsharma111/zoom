@@ -1,6 +1,6 @@
 
 import express from 'express';
-import createSignUpVerification from '../services/authServices.js'
+import createSignUpVerification, { createNewCodeForExisting, findSignupVerificaitonByEmail, verifyOtp } from '../services/authServices.js'
 var router = express.Router();
 import sendVerification from '../services/emailService.js'
 
@@ -8,14 +8,36 @@ import sendVerification from '../services/emailService.js'
 
 router.post('/sign-up/check-email', async function(req, res, next){
   const data = req.body;
-  const response = await createSignUpVerification(data.email)
+  const existingSignUpUser = await findSignupVerificaitonByEmail(data.email);
+  
+  let response;
+  if(!existingSignUpUser){
+    response = await createSignUpVerification(data.email)
+
+  }
+  else{
+    response= await createNewCodeForExisting(existingSignUpUser.id);
+  }
   await sendVerification({
     code: response.code,
+    email: response.email
   })
   res.send('Sign up user')
   
 
 })
+router.post('/sign-up/verify-otp', async function(req, res, next){
+  try {
+    const data = req.body
+    await verifyOtp(data)
+    console.log(data)
+    res.send('OTP matches')
+  } catch {
+    res.status(400).send('OTP does not matches.')
+  }
+  
+})
+
 
 
  router.post('/sign-in/check-emailandpassword', async function(req, res, next){

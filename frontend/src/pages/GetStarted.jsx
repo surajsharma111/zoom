@@ -25,8 +25,8 @@ function SignUp() {
         'Notes for creating and sharing editable documents'
 
     ];
-    const navigate = useNavigate()
-
+    const navigate = useNavigate();
+    
     const {
         register,
         handleSubmit,
@@ -35,21 +35,20 @@ function SignUp() {
       } = useForm({
         resolver: yupResolver(validationSchema)
       });
-    
-    
+
+
       async function handelEmail(data){
+        
         await signUpCheckEmail(data)
-        navigate('/otp')
+        navigate(`/otp?email= ${data.email}`)
+
+
+
         
+
         
-        
 
-      }
-   
-  
-
-
-
+    }
 
     return (
         <div className="flex justify-center max-w-full w-full h-screen ">
