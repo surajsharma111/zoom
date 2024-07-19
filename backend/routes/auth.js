@@ -26,17 +26,20 @@ router.post('/sign-up/check-email', async function(req, res, next){
   
 
 })
-router.post('/sign-up/verify-otp', async function(req, res, next){
+router.post('/sign-up/verify-otp', async function(req, res, next) {
   try {
-    const data = req.body
-    await verifyOtp(data)
-    console.log(data)
-    res.send('OTP matches')
-  } catch {
-    res.status(400).send('OTP does not matches.')
+    const data = req.body;
+    const row = await verifyOtp(data);
+    res.send({message: 'Otp matches', id: row.id});
   }
-  
-})
+  catch{
+    res.status(400).json('OTP does not matches.')
+  } 
+});
+
+router.post('/sign-in', function(req, res, next) {
+    res.send('Sign in User');
+});
 
 
 

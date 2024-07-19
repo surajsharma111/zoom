@@ -42,12 +42,6 @@ function SignUp() {
         await signUpCheckEmail(data)
         navigate(`/otp?email= ${data.email}`)
 
-
-
-        
-
-        
-
     }
 
     return (

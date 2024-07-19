@@ -12,11 +12,6 @@ import checkSigninEmail from "../action/siginAction";
 
 
 
-
-
-
-
-
 function SignIn() {
     const { 
             register,

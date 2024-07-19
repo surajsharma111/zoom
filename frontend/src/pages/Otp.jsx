@@ -1,35 +1,50 @@
 import Banner3 from "../components/Banner3"
 import Logo from "../components/Logo"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { SiGmail } from "react-icons/si";
 import { PiMicrosoftOutlookLogo } from "react-icons/pi";
-import OtpInput from 'react-otp-input';
-import { useState, useEffect } from "react";
-import checkOtp from '../action/verifyOtp'
-
-
+import { useState } from "react";
+import checkOtp from "../action/verifyOtp";
+import { signupValidationSchema } from "../validationSchema/signup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useNavigate } from "react-router-dom";
 
 
 function Otp() {
-    const [otp, setOtp] = useState('');
-    const [email, setEmail] = useState('')
- 
- 
-    let emailParams;
-   useEffect(()=>{
-    const searchParams = new URLSearchParams(window.location.search)
-     emailParams = searchParams.get('email')
-    if(emailParams){
-        setEmail(emailParams)
+    const navigate = useNavigate();
+    let [searchParams] = useSearchParams();
+    const email = searchParams.get('email');
+    const [otpError, setOtpError] = useState('');
+
+
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(signupValidationSchema),
+    });
+
+    async function handleCode(data) {
+        setOtpError('');
+        const response = await checkOtp({
+            ...data,
+            email,
+        });
+        console.log()
+        const body = await response.json();
+        if (response.status === 400) {
+
+            setOtpError(body);
+        }
+        else if (response.status === 200) {
+            navigate(`/activate?email=${email}&id=${body.id}`)
+        }
     }
-    console.log(emailParams)
-   })
-   const handleEmail =  async function(event){
-    event.preventDefault();
-    
-    await checkOtp(emailParams)
-   }
-    
+
+    console.log(errors)
     return (
         <div className="flex justify-center max-w-full w-full h-screen ">
             <div className="container max-w-full w-full bg-gray-50">
@@ -54,36 +69,29 @@ function Otp() {
                         </div>
                     </div>
                     <div className=" w-3/5   h-full flex justify-center items-center  ">
-                        <form onSubmit={handleEmail}
-                          className=" flex flex-col gap-8 items-center  ">
+
+
+                        {
+                            otpError && (<p className='text-sm text-red-600 my-4'>{otpError}</p>)
+                        }
+                        <form onSubmit={handleSubmit(handleCode)}
+                            className=" flex flex-col gap-8 items-center  ">
                             <h1 className=" text-3xl font-semibold">Check Your Email For A Code</h1>
                             <p>{
-                                `Please enter the verification code sent to your email address ${email}`
-                                }</p>
-                            
-                                
-                                <OtpInput
-                                
-                                    className=" border border-black"
-                                    value={otp}
-                                    onChange={setOtp}
-                                    numInputs={6}
-                                    renderSeparator={<span>-</span>}
-                                    renderInput={(props) => <input {...props} />}
-                                
-                                />
+                                `Please enter the verification code sent to your email address ${email} `
+                            }</p>
 
-                       
-                            
+                            <input {...register('code')} type="number" id="number" className=" p-4 border" />
+                            {errors.code?.meaasge && <span className=" text-sm text-red-600">{errors.code.message}</span>}
+
                             <p className=" flex justify-end w-3/5 gap-2">
                                 code expired <a className=" text-blue" href="#">Resend</a>
                             </p>
 
-                            
-                            <input   className="  bg-blue text-white p-2  w-3/5 rounded-xl border disabled:bg-slate-100 disabled:text-slate-500" type="submit" name="submit" value="Verify" />
+                            <input className="  bg-blue text-white p-2  w-3/5 rounded-xl" type="submit" />
                             <p className=" w-3/5 text-center">Can't find the email? Click <a className=" text-blue" href="#">here</a> to resend.</p>
-                            
-                         
+
+
                             <div className=" flex flex-row w-3/5 justify-around">
                                 <div className=" flex gap-2 border p-3  justify-center items-center rounded-xl">
                                     < SiGmail className=" w-6 h-6 text-red-500" />
@@ -93,10 +101,10 @@ function Otp() {
                                     < PiMicrosoftOutlookLogo className=" w-6 h-6 text-lightBlue-400" />
                                     <p>Open Outlook</p>
                                 </div>
-                
+
 
                             </div>
-                            
+
 
                         </form>
                     </div>
@@ -110,4 +118,4 @@ function Otp() {
 
     )
 }
-export default Otp
+export default Otp;
